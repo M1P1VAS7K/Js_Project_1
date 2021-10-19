@@ -31,11 +31,17 @@ onload = () => {
             let ch_y = 0;
             if (curX - (sq_x / 2) < 0) {
                 ch_x = (sq_x / 2) - curX;
+                if (ch_x < 0) {
+                ch_x = 1;
+                }
             } else if (curX > ctx.canvas.width - (sq_x / 2)) {
                 ch_x = curX - ctx.canvas.width - (sq_x / 2);
-                if (ch_x > sq_x - 30000) {
-                    ch_x = 300
+                if (ch_x > sq_x / 2) {
+                ch_x = 1;
                 }
+                /*if (ch_x > sq_x - 30000) {
+                    ch_x = 300
+                }*/
             }
             if (curY - (sq_y / 2) < 0) {
                 ch_y = (sq_y / 2) - curY;
@@ -47,7 +53,7 @@ onload = () => {
             }
             ctx.fillStyle = 'black';
             ctx.setTransform(1, 0, 0, 1, 0, 0);
-            ctx.strokeRect(curX - (sq_x / 2), curY - (sq_y / 2), sq_x, sq_y);
+            ctx.strokeRect(curX - (ch_x / 2), curY - (ch_y / 2), ch_x, ch_y);
         }
     };
 
