@@ -3,12 +3,6 @@ onload = () => {
     const canvas = document.getElementById("CANVAS");
     const ctx = canvas.getContext("2d");
 
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-    let prevX = null;
-    let prevY = null;
-
     const sq_x = 100;
     const sq_y = 100;
 
@@ -63,13 +57,27 @@ onload = () => {
                 ch_x1 = ch_x * 2;
                 ctx.fillStyle = 'black';
                 ctx.setTransform(1, 0, 0, 1, 0, 0);
+                if (ch_y1 / 2 + curY > ctx.canvas.height) {
+                    ch_x1 = ch_x1 + ((ch_y1 / 2 + curY) - ctx.canvas.height) * 2;
+                    ch_y1 = ch_y1 - ((ch_y1 / 2 + curY) - ctx.canvas.height) * 2;
+                } else if (curY - ch_y1 / 2 < 0) {
+                    ch_x1 = ch_x1 + (ch_y1 / 2 - curY) * 2;
+                    ch_y1 = ch_y1 - (ch_y1 / 2 - curY) * 2;
+                }
                 ctx.strokeRect(curX - (ch_x1 / 2), curY - (ch_y1 / 2), ch_x1, ch_y1);
-                console.log(ch_y1, ch_x1, curX, curY);
+                console.log(ch_x1, ch_y1);
             } else if (c1 == 0 && c2 == 1) {
                 ch_y2 = ch_y * 2;
                 ch_x2 = sq_x + ((sq_y / 2 - ch_y) * 2);
                 ctx.fillStyle = 'black';
                 ctx.setTransform(1, 0, 0, 1, 0, 0);
+                if (ch_x2 / 2 + curX > ctx.canvas.width) {
+                    ch_y2 = ch_y2 + ((ch_x2 / 2 + curX) - ctx.canvas.width) * 2;
+                    ch_x2 = ch_x2 - ((ch_x2 / 2+ curX) - ctx.canvas.width) * 2;
+                } else if (curX - ch_x2 / 2 < 0) {
+                    ch_y2 = ch_y2 + (ch_x2 / 2 - curX) * 2;
+                    ch_x2 = ch_x2 - (ch_x2 / 2 - curX) * 2;
+                }
                 ctx.strokeRect(curX - (ch_x2 / 2), curY - (ch_y2 / 2), ch_x2, ch_y2);
 
 
